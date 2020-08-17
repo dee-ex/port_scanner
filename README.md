@@ -20,3 +20,5 @@ The tool will scan from 1 to b. Or, if you drop `-b`
 go run main.go hostname a
 ```
 The range which the tool scan is from `a` to `65000`.
+## Demo
+![demo](screenshots/demo.png)
