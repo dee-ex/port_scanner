@@ -5,9 +5,9 @@ Run command
 ```
 go run main.go hostname
 ```
-where hostname can be a domain name or ip address. :D
-This tool helps you scan from port No.1 to port No.65000.
-If you wanna scan in you desirable range (e.g `[a, b]`), run command
+where hostname can be a domain name or ip address. :D  
+This tool helps you scan from port No.1 to port No.65000.  
+If you wanna scan in you desirable range (e.g `[a, b]`), run command  
 ```
 go run main.go hostname a-b
 ```
