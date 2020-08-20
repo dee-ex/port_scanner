@@ -1,13 +1,13 @@
 package main
 
 import "fmt"
-import "os"
 import "net"
 import "strings"
 import "strconv"
 import "time"
 import "runtime"
 import "sort"
+import "flag"
 
 type scan_result struct {
     Port int
@@ -73,28 +73,28 @@ func disp_info(hostname, protocol string, start, stop , num_port int, open_ports
 }
 
 func main() {
+    host := flag.String("host", "127.0.0.1", "hostname that long to scan")
+    r := flag.String("r", "1-65000", "range that long to scan")
+    p := flag.String("p", "tcp", "protocal that long to scan")
+    flag.Parse()
+    hostname := *host
+    protocol := *p
 
-    runtime.GOMAXPROCS(100)
-    var limit_chan = 4000
-
-    var start, stop int = 1, 65000
-    var protocol string = "tcp"
-    var res scan_result
-    var open_ports []int
-
-    lock_chan := make(chan bool, limit_chan)
-    results_chan := make(chan scan_result, limit_chan)
-
-    hostname := os.Args[1]
     if !check_hostname(hostname) {
         fmt.Println("Invalid hostname")
         return
     }
 
-    if !(len(os.Args) < 3) {
-        r := strings.Split(os.Args[2], "-")
-        start, stop = get_range(r)
-    }
+    start, stop := get_range(strings.Split(*r, "-"))
+
+    runtime.GOMAXPROCS(100)
+    var limit_chan = 4000
+
+    var res scan_result
+    var open_ports []int
+
+    lock_chan := make(chan bool, limit_chan)
+    results_chan := make(chan scan_result, limit_chan)
 
     fmt.Println("Starting")
     start_time := time.Now()

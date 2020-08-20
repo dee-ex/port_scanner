@@ -1,24 +1,19 @@
-# port_scanner
+# Port Scanner
 A Simple Port Scanner in Golang
 ## Usage
 Run command
 ```
-go run main.go hostname
+go run main.go -host=hostname -r=a-b -p=protocol
 ```
-where hostname can be a domain name or ip address. :D  
-This tool helps you scan from port No.1 to port No.65000.  
-If you wanna scan in you desirable range (e.g `[a, b]`), run command  
-```
-go run main.go hostname a-b
-```
-In case you forget `a`, like
-```
-go run main.go hostname -b
-```
-The tool will scan from 1 to b. Or, if you drop `-b`
-```
-go run main.go hostname a
-```
-The range which the tool scan is from `a` to `65000`.
+where `hostname` can be a domain name or ip address. The range `a-b` is the range that you long to scan.  
+In default (case you didn't pass any argument), `hostname=127.0.0.1, r=1-65000, p=tcp`.  
+The option range can be `a-b -> [a, b], a -> [a, 65000], -b -> [1, b]`.
 ## Demo
-![demo](screenshots/demo.png)
+No argument passed
+![demo no argument passed](screenshots/demo_no_arg.png)
+`hostname` passed
+![demo hostname passed](screenshots/demo_with_host.png)
+`hostname, r` passed
+![demo hostname, r passed](screenshots/demo_with_host_r.png)
+`hostname, r, p` passed
+![demo hostname, r, p passed](screenshots/demo_with_host_r_p.png)
