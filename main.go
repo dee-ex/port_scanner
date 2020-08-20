@@ -73,19 +73,18 @@ func disp_info(hostname, protocol string, start, stop , num_port int, open_ports
 }
 
 func main() {
-    host := flag.String("host", "127.0.0.1", "hostname that long to scan")
-    r := flag.String("r", "1-65000", "range that long to scan")
-    p := flag.String("p", "tcp", "protocal that long to scan")
+    var hostname, r, protocol string
+    flag.StringVar(&hostname, "host", "127.0.0.1", "hostname that long to scan")
+    flag.StringVar(&r, "r", "1-65000", "range that long to scan")
+    flag.StringVar(&protocol, "p", "tcp", "protocal that long to scan")
     flag.Parse()
-    hostname := *host
-    protocol := *p
 
     if !check_hostname(hostname) {
         fmt.Println("Invalid hostname")
         return
     }
 
-    start, stop := get_range(strings.Split(*r, "-"))
+    start, stop := get_range(strings.Split(r, "-"))
 
     runtime.GOMAXPROCS(100)
     var limit_chan = 4000
